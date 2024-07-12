@@ -32,9 +32,9 @@ jobs:
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
     - name: Clone source code
       env:
-        KERNEL: 4.4
+        KERNEL: 3.4
       run: |
-        if [ $KERNEL = "4.4" ] ; then
+        if [ $KERNEL = "3.4" ] ; then
         git clone --depth=1 https://github.com/minax007/padavan-4.4 /opt/rt-n56u
         else
         git clone --depth=1 https://github.com/MeIsReallyBa/rt-n56u.git /opt/rt-n56u
@@ -45,7 +45,7 @@ jobs:
     - name: Build Firmware
       env:
         TNAME: MI-R4A
-        KERNEL: 4.4
+        KERNEL: 3.4
       run: |
         cd /opt/rt-n56u/toolchain-mipsel
         chmod a+x ./dl_toolchain.sh
@@ -130,6 +130,7 @@ jobs:
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
+        ls -l /opt/images/
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()
